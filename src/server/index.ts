@@ -5,6 +5,8 @@ import { promisify } from 'util';
 
 const asyncReadFile = promisify(readFile);
 
+const PORT = process.env.PORT || 33493;
+
 const publicDir = join(__dirname, '../../public');
 const htmlDir = join(publicDir, 'assets/index.html');
 
@@ -64,6 +66,6 @@ const server = createServer(async (req, res) => {
    }
 });
 
-server.listen(80, '0.0.0.0');
+server.listen(PORT, '0.0.0.0');
 
-console.log('Server running in http://0.0.0.0:80');
+console.log('Server running in http://0.0.0.0:${PORT}');
