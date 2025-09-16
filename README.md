@@ -66,19 +66,16 @@ npm run start
 
 - NodeJS
 - Code Editor (VSCode recommended)
-- Typescript Compiler
-- Vite
 
 ### Recommended VSCode Extensions
 
 - ESLint
 - Prettier
-- Dependi
 
 ### Rules
 
 - Your changes should be checked for any vulnerabilities
-- Your code must all the test
+- Your code must pass all the tests
 - Your code must be formatted according to the repo standard
 - Your code must blend in well with design principles of the project (mentioned in project design)
 
