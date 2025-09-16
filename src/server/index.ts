@@ -5,7 +5,7 @@ import { promisify } from 'util';
 
 const asyncReadFile = promisify(readFile);
 
-const PORT = process.env.PORT || 33493;
+const PORT = 30007;
 
 const publicDir = join(__dirname, '../../public');
 const htmlDir = join(publicDir, 'assets/index.html');
