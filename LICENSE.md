@@ -4,6 +4,8 @@
 
 All source code in this project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).
 
+Copyright (c) 2025 LimitedLeaf (<limitedleaf7@gmail.com>)
+
 This means you are free to:
 
 - Use, modify, and distribute the code, for personal or commercial purposes.
@@ -12,7 +14,7 @@ This means you are free to:
 Requirements:
 
 - Any derivative work must also be licensed under AGPL-3.0.
-- Proper attribution to the original author (limitedleaf) must be given.
+- Proper attribution to the original author must be given.
 
 For the full license text, see:
 [agpl-3.0](https://www.gnu.org/licenses/agpl-3.0.en.html)
