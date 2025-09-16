@@ -1,7 +1,8 @@
 # Build / Compilation output dirs
 build/
-dist/
+public/assets/
 *.tsbuildinfo
+/node_modules
 
 # Log files 
 log/
