@@ -64,6 +64,6 @@ const server = createServer(async (req, res) => {
    }
 });
 
-server.listen(3000);
+server.listen(80, '0.0.0.0');
 
-console.log('Server running in http://localhost:3000');
+console.log('Server running in http://0.0.0.0:80');
