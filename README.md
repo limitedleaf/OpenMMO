@@ -2,6 +2,8 @@
 
 An open sourced mmo rpg game.
 
+Check us out at [openmmo.fun](https://openmmo.fun)
+
 [![License](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0) [![Top Language](https://img.shields.io/github/languages/top/limitedleaf/OpenMMO.svg)](https://github.com/limitedleaf/OpenMMO) [![Last Commit](https://img.shields.io/github/last-commit/limitedleaf/OpenMMO.svg)](https://github.com/limitedleaf/OpenMMO/commits)
  ![Development](https://img.shields.io/badge/Status-Dev-orange)
 
@@ -115,7 +117,7 @@ They are ordered based on their priority
 
 ### Core & Networking
 
-- [ ] Logging setup
+- [x] Logging setup
 - [ ] Event system setup.
 - [ ] Core utility setup.
 - [ ] Core HTTP server.
@@ -165,7 +167,7 @@ They are ordered based on their priority
 
 ### Community
 
-- [ ] Obtaining a cool domain
+- [x] Obtaining a cool domain
 - [ ] Proper Discord server setup and game promotion.
 - [ ] Bug reporting channels.
 - [ ] Alpha testing and bugfix.

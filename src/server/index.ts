@@ -1,7 +1,15 @@
+import { Logger } from '@core/logging/Logger';
+import { LoggerMode } from '@core/logging/Mode';
 import { readFile } from 'fs';
 import { createServer, ServerResponse } from 'http';
 import { extname, join, resolve } from 'path';
 import { promisify } from 'util';
+
+const logger = new Logger({
+   prefix: '[MAIN]',
+   mode: LoggerMode.Debug,
+   filepath: resolve(__dirname, '../../logs/main.log')
+})
 
 const asyncReadFile = promisify(readFile);
 
@@ -23,16 +31,16 @@ async function serveIndex(res: ServerResponse) {
 }
 
 const server = createServer(async (req, res) => {
-   console.debug('Request Received');
+   logger.debug('Request Received');
 
    if (!req.method || req.method != 'GET') {
-      console.debug('Unsupported method, returning index.html');
+      logger.debug('Unsupported method, returning index.html');
       await serveIndex(res);
       return;
    }
 
    if (!req.url || req.url == '/' || req.url == '') {
-      console.debug('No url or home url, returning index.html');
+      logger.debug('No url or home url, returning index.html');
       await serveIndex(res);
       return;
    }
@@ -40,10 +48,10 @@ const server = createServer(async (req, res) => {
    const url = new URL(req.url, 'http://localhost:3000');
    const path = join(publicDir, url.pathname);
 
-   console.debug('Requested path: ', path);
+   logger.debug('Requested path: ', path);
 
    if (!path.startsWith(publicDir)) {
-      console.debug('Path outside public dir: aborting response with 403');
+      logger.debug('Path outside public dir: aborting response with 403');
       res.writeHead(403).end();
       return;
    }
@@ -52,20 +60,19 @@ const server = createServer(async (req, res) => {
       const ext = extname(path);
       const contentType = contentTypes[ext];
       if (!contentType) {
-         console.debug('Unsupported content-type, aborting with 404, ext:', ext);
+         logger.debug('Unsupported content-type, aborting with 404, ext:', ext);
          res.writeHead(404).end();
          return;
       }
       const data = await asyncReadFile(path);
       res.writeHead(200, { 'content-type': contentType });
       res.end(data);
-      console.debug('Successfully processed request');
+      logger.debug('Successfully processed request');
    } catch (err) {
-      console.debug('Error occurred while reading file, err:', err);
+      logger.debug('Error occurred while reading file, err:', err);
       res.writeHead(404).end();
    }
 });
 
-server.listen(PORT, '0.0.0.0');
-
-console.log('Server running in http://0.0.0.0:${PORT}');
+server.listen(3000);
+logger.info('Server running in http://localhost:3000');
