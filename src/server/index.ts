@@ -1,5 +1,6 @@
 import { Logger } from '@core/logging/Logger';
 import { LoggerMode } from '@core/logging/Mode';
+import { Signal } from '@core/signal/Signal';
 import { readFile } from 'fs';
 import { createServer, ServerResponse } from 'http';
 import { extname, join, resolve } from 'path';
@@ -8,8 +9,8 @@ import { promisify } from 'util';
 const logger = new Logger({
    prefix: '[MAIN]',
    mode: LoggerMode.Debug,
-   filepath: resolve(__dirname, '../../logs/main.log')
-})
+   filepath: resolve(__dirname, '../../logs/main.log'),
+});
 
 const asyncReadFile = promisify(readFile);
 
@@ -55,7 +56,6 @@ const server = createServer(async (req, res) => {
       res.writeHead(403).end();
       return;
    }
-
    try {
       const ext = extname(path);
       const contentType = contentTypes[ext];
@@ -73,6 +73,21 @@ const server = createServer(async (req, res) => {
       res.writeHead(404).end();
    }
 });
-
 server.listen(3000);
 logger.info('Server running in http://localhost:3000');
+
+const testSignal = new Signal<[string, number]>();
+
+testSignal.once((str, num) => {
+   logger.info('Should run first: ', str, num);
+});
+
+async function test() {
+   const [str, num] = await testSignal.wait();
+   logger.info('Should run second: ', str, num);
+}
+
+test();
+
+testSignal.fire('HelloWorld', 1);
+testSignal.fire('Never seen', 1);
