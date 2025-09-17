@@ -26,7 +26,8 @@ export class Logger implements Destroyable {
       this.prefix = init.prefix;
       this.selectedMode = init.mode ?? LoggerMode.Info;
       this.colors = init.colors ?? DEFAULT_LOGGER_COLORS;
-      this.modePrefixes = init.modePrefixes == null ? DEFAULT_LOGGER_MODE_PREFIXES : init.modePrefixes;
+      this.modePrefixes =
+         init.modePrefixes == null ? DEFAULT_LOGGER_MODE_PREFIXES : init.modePrefixes;
       if (init.filepath) {
          this.writer = new Writer(init.filepath);
       }
@@ -40,19 +41,18 @@ export class Logger implements Destroyable {
    }
 
    private log(mode: LoggerMode, ...msgs: any[]) {
-      checkDestroy(this)
+      checkDestroy(this);
       if (mode < this.selectedMode) return;
 
-      const timestamp = new Date().toISOString().slice(11, 19);
-      const fileLine = `[${timestamp}]${this.prefix}${this.modePrefixes[mode]} ${msgs}`
+      const date = new Date();
+      const stamp = date.toLocaleString();
+      const line = `${this.colors[mode]}[${stamp}]${this.prefix}${this.modePrefixes[mode]} ${msgs.join(' ')}${ColorCodes.Reset}`;
 
       if (this.writer) {
-         this.writer.append(fileLine + '\n');
+         this.writer.append(line + '\n');
       }
 
-      const consoleLine = this.colors[mode] + fileLine + ColorCodes.Reset
-      
-      console.log(consoleLine);
+      console.log(line);
    }
 
    public debug(...args: any[]) {
