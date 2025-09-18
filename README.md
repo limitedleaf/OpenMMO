@@ -118,7 +118,7 @@ They are ordered based on their priority
 ### Core & Networking
 
 - [x] Logging setup
-- [ ] Event system setup.
+- [x] Event system setup.
 - [ ] Core utility setup.
 - [ ] Core HTTP server.
 - [ ] Client router.
