@@ -1,1 +1,0 @@
-use an ansi text previewer to see the log file with colors.

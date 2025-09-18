@@ -1,5 +1,6 @@
 import { Destroyable, checkDestroy } from "@core/utils/lifecyles/Destroyable";
-import { WriteStream, createWriteStream } from "fs";
+import { WriteStream, createWriteStream, mkdirSync } from "fs";
+import { dirname } from "path";
 
 export class Writer implements Destroyable {
    private stream: WriteStream;
@@ -7,6 +8,7 @@ export class Writer implements Destroyable {
    public isDestroyed = false;
 
    constructor(filepath: string) {
+      mkdirSync(dirname(filepath), { recursive: true });
       this.stream = createWriteStream(filepath, {'emitClose': true, 'flags': 'w'});
    }
 
